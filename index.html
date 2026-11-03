@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101827">
+<title>半導体クエスト</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#101827;color:#f5f7fb;
+ font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP",sans-serif;
+ padding-bottom:85px
+}
+header{
+ padding:22px 20px;background:#182438;
+ border-bottom:1px solid #30415c
+}
+header small{color:#8fa8ce}
+header h1{margin:5px 0;font-size:23px}
+.container{padding:18px;max-width:650px;margin:auto}
+.card{
+ background:#1b2940;border:1px solid #344967;
+ border-radius:18px;padding:18px;margin-bottom:16px
+}
+.label{font-size:12px;color:#9db5d9}
+h2{font-size:19px;margin:8px 0 14px}
+h3{font-size:16px;margin:8px 0}
+p{line-height:1.8;color:#d7e0ee}
+button{
+ border:0;border-radius:12px;padding:14px;
+ font-size:15px;font-weight:bold;cursor:pointer
+}
+.primary{background:#64a5ff;color:#10213c;width:100%}
+.secondary{background:#2d405e;color:white;width:100%}
+.option{
+ display:block;width:100%;text-align:left;margin:9px 0;
+ background:#263953;color:white;border:1px solid #405879
+}
+.option.selected{border:2px solid #64a5ff;background:#304e73}
+input,textarea{
+ width:100%;padding:14px;border-radius:12px;
+ border:1px solid #50627d;background:#111d30;
+ color:white;font-size:15px;margin:8px 0
+}
+textarea{min-height:90px;resize:vertical}
+nav{
+ position:fixed;bottom:0;left:0;right:0;
+ display:flex;background:#182438;border-top:1px solid #40516c;
+ justify-content:space-around;padding:10px 2px;
+ z-index:10
+}
+nav button{background:transparent;color:#a9bbd4;font-size:12px;padding:8px 5px}
+nav button.active{color:#70adff}
+.bar{height:10px;background:#34445d;border-radius:10px;overflow:hidden}
+.bar div{height:100%;background:#65a7ff;width:0}
+.big{font-size:32px;font-weight:bold;color:#80b8ff}
+.hidden{display:none}
+.good{color:#65e5ad}
+.bad{color:#ff9292}
+.badge{display:inline-block;background:#304968;padding:6px 10px;border-radius:20px;font-size:12px}
+</style>
+</head>
+<body>
+
+<header>
+ <small>SEMICONDUCTOR QUEST</small>
+ <h1>⚡ 半導体クエスト</h1>
+ <small>知識を武器に、半導体の世界を冒険しよう。</small>
+</header>
+
+<main class="container">
+
+<section id="home">
+ <div class="card">
+  <div class="label">CURRENT LEVEL</div>
+  <h2 id="levelName">🌱 半導体ビギナー</h2>
+  <div class="big" id="level">Lv.1</div>
+  <p><span id="xp">0</span> XP</p>
+  <div class="bar"><div id="xpBar"></div></div>
+  <p class="label" id="nextXp">次のレベルまで100 XP</p>
+ </div>
+
+ <div class="card">
+  <div class="label">TODAY'S MISSION</div>
+  <h2>🎯 今日の学習ミッション</h2>
+  <p>半導体の基礎を学んで、クイズに挑戦しよう！</p>
+  <button class="primary" onclick="show('learn')">学習を始める →</button>
+ </div>
+
+ <div class="card">
+  <h2>📊 学習ステータス</h2>
+  <p>回答数：<b id="total">0</b> 問</p>
+  <p>正解数：<b id="correct">0</b> 問</p>
+  <p>正答率：<b id="rate">0%</b></p>
+ </div>
+
+ <div class="card">
+  <h2>🗺️ 冒険の進捗</h2>
+  <p>第1章：半導体の基本 <span class="badge">挑戦可能</span></p>
+  <p>第2章：センサーとIC <span class="badge">挑戦可能</span></p>
+  <p>第3章：産業機器・医療機器 <span class="badge">準備中</span></p>
+ </div>
+</section>
+
+<section id="learn" class="hidden">
+ <h2>📚 半導体の学習</h2>
+ <div class="card">
+  <div class="label">CHAPTER 01</div>
+  <h2>半導体って何？</h2>
+  <p>半導体とは、電気を通しやすい「導体」と、電気を通しにくい「絶縁体」の中間的な性質を持つ材料のこと。</p>
+  <p>代表例はシリコン。スマートフォン、パソコン、自動車、医療機器など、さまざまな製品に使われているよ。</p>
+  <h3>💡 身近な製品とのつながり</h3>
+  <p>スマートフォンの中には、計算をするCPU、情報を記憶するメモリ、画像を処理するICなど、たくさんの半導体が入っている。</p>
+ </div>
+ <div class="card">
+  <div class="label">CHAPTER 02</div>
+  <h2>センサーICとは？</h2>
+  <p>センサーICは、温度・光・磁気・圧力など、周囲の変化を検知して電気信号に変換する半導体。</p>
+  <h3>💡 身近な例</h3>
+  <p>スマートフォンの画面回転、エアコンの温度調整、自動車の位置検出などに活用されているよ。</p>
+ </div>
+ <div class="card">
+  <div class="label">CHAPTER 03</div>
+  <h2>ホールICとは？</h2>
+  <p>ホールICは磁気を検知するセンサーIC。磁石が近づいたことや、磁石のN極・S極などを検知できる。</p>
+  <h3>💡 身近な例</h3>
+  <p>モーターの回転位置検出、ドアの開閉検知、機器の位置検出などに使われているよ。</p>
+ </div>
+ <button class="primary" onclick="startQuiz()">学習クイズに挑戦！</button>
+</section>
+
+<section id="quiz" class="hidden">
+ <h2>⚔️ 知識の試練</h2>
+ <div class="card">
+  <div class="label" id="qCount">QUESTION 1</div>
+  <div class="bar"><div id="qBar"></div></div>
+  <h2 id="question"></h2>
+  <div id="options"></div>
+  <p class="label">なぜその答えを選んだ？</p>
+  <textarea id="reason" placeholder="自分の考えを書いてみよう！"></textarea>
+  <button class="secondary" onclick="dontKnow()">🤔 わからない</button>
+  <button class="primary" style="margin-top:10px" onclick="submitAnswer()">回答する</button>
+ </div>
+ <div id="feedback" class="card hidden"></div>
+</section>
+
+<section id="history" class="hidden">
+ <h2>📈 学習記録</h2>
+ <div class="card">
+  <h2>冒険の成果</h2>
+  <p>総獲得経験値：<b id="historyXp">0</b> XP</p>
+  <p>回答数：<b id="historyTotal">0</b> 問</p>
+  <p>正解数：<b id="historyCorrect">0</b> 問</p>
+  <p>正答率：<b id="historyRate">0%</b></p>
+ </div>
+ <div class="card">
+  <h2>最近の学習</h2>
+  <div id="historyList">まだ学習記録がありません。</div>
+ </div>
+</section>
+
+<section id="input" class="hidden">
+ <h2>🔍 調べて学ぶ</h2>
+ <div class="card">
+  <p>気になる半導体の用語や記事のURLを入力しよう。</p>
+  <input id="searchInput" placeholder="例：MOSFET、ホールIC">
+  <button class="primary" onclick="searchTerm()">調べる</button>
+  <div id="searchResult"></div>
+  <p class="label">※現在は基本用語の検索デモです。AIによる記事要約機能は今後追加予定。</p>
+ </div>
+</section>
+
+</main>
+
+<nav>
+ <button class="active" onclick="show('home',this)">🏠<br>ホーム</button>
+ <button onclick="show('learn',this)">📚<br>学習</button>
+ <button onclick="show('quiz',this)">⚔️<br>クイズ</button>
+ <button onclick="show('history',this)">📈<br>記録</button>
+ <button onclick="show('input',this)">🔍<br>検索</button>
+</nav>
+
+<script>
+const questions=[
+{
+ q:"半導体の代表的な材料はどれ？",
+ a:["鉄","シリコン","木材","ガラス"],
+ correct:1,
+ explanation:"シリコンは代表的な半導体材料。ICやトランジスタなど、多くの半導体製品の基礎になっているよ。"
+},
+{
+ q:"センサーICの主な役割は？",
+ a:["電気を蓄えるだけ","周囲の変化を検知して信号にする","音を大きくする","水を冷やす"],
+ correct:1,
+ explanation:"センサーICは温度・光・磁気などの変化を検知し、電気信号に変換する役割を持つよ。"
+},
+{
+ q:"ホールICが検知するものは？",
+ a:["磁気","音","湿度","匂い"],
+ correct:0,
+ explanation:"ホールICは磁気を検知するIC。磁石の位置やモーターの回転位置検出などに活用されるよ。"
+},
+{
+ q:"モーターの回転位置を検知するために使われることがあるセンサーは？",
+ a:["ホールIC","マイク","スピーカー","LED"],
+ correct:0,
+ explanation:"ホールICは磁石の磁界を検知することで、モーターの回転位置や速度の把握に役立つよ。"
+},
+{
+ q:"スマートフォンの中に半導体が使われている理由として適切なのは？",
+ a:["装飾のため","計算や記憶、制御を行うため","重くするため","電池をなくすため"],
+ correct:1,
+ explanation:"半導体は計算・記憶・通信・センサー・電源制御など、スマートフォンのさまざまな機能を支えているよ。"
+}
+];
+
+let current=0,selected=-1,answered=false;
+let data=JSON.parse(localStorage.getItem("semquest")||'{"xp":0,"total":0,"correct":0,"history":[]}');
+
+function save(){
+ localStorage.setItem("semquest",JSON.stringify(data));
+ update();
+}
+function show(id,btn){
+ document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));
+ document.getElementById(id).classList.remove("hidden");
+ document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+ if(btn)btn.classList.add("active");
+ if(id==="history")update();
+}
+function update(){
+ let lv=Math.floor(data.xp/100)+1;
+ let names=["🌱 半導体ビギナー","🔧 半導体見習い","⚡ 半導体探検家","🛠️ 半導体エンジニア","🚀 半導体マスター","👑 伝説の半導体勇者"];
+ document.getElementById("level").textContent="Lv."+lv;
+ document.getElementById("levelName").textContent=names[Math.min(lv-1,names.length-1)];
+ document.getElementById("xp").textContent=data.xp;
+ document.getElementById("xpBar").style.width=(data.xp%100)+"%";
+ document.getElementById("nextXp").textContent="次のレベルまで"+(100-data.xp%100)+" XP";
+ document.getElementById("total").textContent=data.total;
+ document.getElementById("correct").textContent=data.correct;
+ document.getElementById("rate").textContent=data.total?Math.round(data.correct/data.total*100)+"%":"0%";
+ document.getElementById("historyXp").textContent=data.xp;
+ document.getElementById("historyTotal").textContent=data.total;
+ document.getElementById("historyCorrect").textContent=data.correct;
+ document.getElementById("historyRate").textContent=data.total?Math.round(data.correct/data.total*100)+"%":"0%";
+ document.getElementById("historyList").innerHTML=data.history.length?data.history.slice(-10).reverse().map(h=>"<p>"+h+"</p>").join(""):"まだ学習記録がありません。";
+}
+function startQuiz(){
+ current=0;
+ show("quiz");
+ renderQuestion();
+}
+function renderQuestion(){
+ selected=-1;answered=false;
+ document.getElementById("feedback").classList.add("hidden");
+ document.getElementById("reason").value="";
+ let q=questions[current];
+ document.getElementById("qCount").textContent="QUESTION "+(current+1)+" / "+questions.length;
+ document.getElementById("qBar").style.width=(current/questions.length*100)+"%";
+ document.getElementById("question").textContent=q.q;
+ document.getElementById("options").innerHTML="";
+ q.a.forEach((a,i)=>{
+  let b=document.createElement("button");
+  b.className="option";
+  b.textContent=(i+1)+". "+a;
+  b.onclick=()=>{
+   if(answered)return;
+   selected=i;
+   document.querySelectorAll(".option").forEach(x=>x.classList.remove("selected"));
+   b.classList.add("selected");
+  };
+  document.getElementById("options").appendChild(b);
+ });
+}
+function submitAnswer(){
+ if(answered)return;
+ if(selected<0){alert("答えを選んでね！");return;}
+ evaluate(selected);
+}
+function dontKnow(){
+ if(answered)return;
+ evaluate(-1);
+}
+function evaluate(answer){
+ answered=true;
+ let q=questions[current];
+ let ok=answer===q.correct;
+ data.total++;
+ if(ok){data.correct++;data.xp+=20;}
+ else{data.xp+=5;}
+ let reason=document.getElementById("reason").value.trim();
+ let fb=document.getElementById("feedback");
+ fb.classList.remove("hidden");
+ fb.innerHTML="<h2 class='"+(ok?"good":"bad")+"'>"+(answer===-1?"🤔 今回は解説を確認しよう":ok?"🎉 正解！":"💡 惜しい！")+"</h2><p><b>正解："+q.a[q.correct]+"</b></p><p>"+q.explanation+"</p><p>あなたの考え："+(reason||"未入力")+"</p><p>獲得経験値："+(ok?20:5)+" XP</p><button class='primary' onclick='nextQuestion()'>"+(current===questions.length-1?"結果を見る":"次の問題へ")+"</button>";
+ data.history.push((ok?"⭕":"❌")+" "+q.q+"（"+(ok?"正解":"復習")+"）");
+ save();
+}
+function nextQuestion(){
+ current++;
+ if(current>=questions.length){
+  document.getElementById("question").textContent="🎊 クエスト完了！";
+  document.getElementById("options").innerHTML="<p>今回の冒険、お疲れさま！学習記録を確認してみよう。</p>";
+  document.getElementById("feedback").classList.add("hidden");
+  document.getElementById("qCount").textContent="MISSION COMPLETE";
+  document.getElementById("reason").classList.add("hidden");
+  return;
+ }
+ renderQuestion();
+}
+function searchTerm(){
+ let t=document.getElementById("searchInput").value.trim();
+ if(!t){alert("用語を入力してね！");return;}
+ let terms={
+  "MOSFET":"MOSFETは電気信号によって電流の流れを制御する半導体素子。スイッチや増幅回路などに使われるよ。",
+  "ホールIC":"磁界を検知するセンサーIC。モーターの回転位置や磁石の位置検出などに使われるよ。",
+  "半導体":"電気の通しやすさを制御できる材料や、その性質を利用した電子部品の総称だよ。",
+  "コンデンサ":"電気を一時的に蓄えたり、電源の電圧変動を抑えたりする電子部品だよ。",
+  "マイコン":"CPUやメモリ、入出力機能などを1つのICにまとめた制御用半導体だよ。"
+ };
+ let result=terms[t]||"この用語はまだ辞書に登録されていないよ。今後AI検索機能を追加して、詳しく調べられるようにするね。";
+ document.getElementById("searchResult").innerHTML="<div class='card'><h3>"+t+"</h3><p>"+result+"</p></div>";
+}
+update();
+</script>
+</body>
+</html>
